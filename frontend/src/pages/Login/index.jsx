@@ -1,11 +1,10 @@
-import React from 'react'
-
 const Login = () => {
+
     return (
         <div className='min-h-screen flex items-center justify-center'>
             <div className='shadow-2xl max-w-[460px] rounded-2xl p-5'>
                 <div>
-                    <h1 className='text-2xl font-semibold text-center'>Uygulamayı kullanabilmek için lütfen <span className='text-blue-700'>giriş</span> yapınız!</h1>
+                    <h1 className='text-2xl font-semibold text-center'>Uygulamayı kullanabilmek için lütfen <span className='text-anarenk'>giriş</span> yapınız!</h1>
                 </div>
                 <form action="">
                     <div>
@@ -34,7 +33,7 @@ const Login = () => {
                         </div>
                     </div>
                     <div>
-                        <button className='bg-[#0078F0] w-full mt-5 p-4 text-white font-semibold'>Giriş Yap</button>
+                        <button className='bg-anarenk w-full mt-5 p-4 text-white font-semibold'>Giriş Yap</button>
                     </div>
                 </form>
             </div>
