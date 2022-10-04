@@ -1,4 +1,5 @@
 import React from 'react'
+import { Sil } from '../Icon'
 
 const Product = () => {
     return (
@@ -17,11 +18,11 @@ const Product = () => {
                     </thead>
                     <tbody>
                         <tr className='text-center text-white bg-gray-700'>
-                            <td>100</td>
-                            <td>780 mt</td>
-                            <td>20000 tl</td>
-                            <td>03.10.2022</td>
-                            <td>Sil</td>
+                            <td className='border border-slate-300'>100</td>
+                            <td className='border border-slate-300'>780 mt</td>
+                            <td className='border border-slate-300'>20000 tl</td>
+                            <td className='border border-slate-300'>03.10.2022</td>
+                            <td className='flex justify-center'><Sil /></td>
                         </tr>
                     </tbody>
                 </table>
@@ -45,7 +46,7 @@ const Product = () => {
                             <td>780 mt</td>
                             <td>20000 tl</td>
                             <td>03.10.2022</td>
-                            <td>Sil</td>
+                            <td className='flex justify-center'><Sil /></td>
                         </tr>
                     </tbody>
                 </table>

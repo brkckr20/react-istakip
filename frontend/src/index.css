@@ -2,7 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base{
+
+@layer components {
+
+  #main::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    min-height: 100%;
+    background-color: black;
+    opacity: .8;
+    z-index: -1;
+  }
+}
+
+@layer base {
   html {
     font-family: 'Poppins', sans-serif;
   }

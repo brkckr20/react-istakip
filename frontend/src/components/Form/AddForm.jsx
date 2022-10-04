@@ -1,4 +1,5 @@
 import React from 'react'
+import { Arti } from '../Icon'
 
 const AddForm = () => {
     return (
@@ -13,17 +14,17 @@ const AddForm = () => {
                             <input type="text" className='w-full outline-none p-1 pl-2 rounded-sm' placeholder='Ürün Metresi' />
                         </div>
                         <div>
-                            <input type="text" className='w-full outline-none p-1 pl-2 rounded-sm' placeholder='Ürün Birim Fiyat'/>
+                            <input type="text" className='w-full outline-none p-1 pl-2 rounded-sm' placeholder='Ürün Birim Fiyat' />
                         </div>
                         <div>
-                            <input type="date" className='w-full outline-none p-1 pl-2 rounded-sm' placeholder='Ürün Metresi'/>
+                            <input type="date" className='w-full outline-none p-1 pl-2 rounded-sm' placeholder='Ürün Metresi' />
                         </div>
                         <div>
-                            <input type="text" className='w-full outline-none p-1 pl-2 rounded-sm' placeholder='Firma Seçiniz'/>
+                            <input type="text" className='w-full outline-none p-1 pl-2 rounded-sm' placeholder='Firma Seçiniz' />
                         </div>
                     </div>
                     <div className='flex justify-center'>
-                        <button type="submit" className='bg-blue-700 hover:bg-blue-800 transition-colors px-2 py-2 rounded-sm mt-2 text-white w-auto'>Kaydet</button>
+                        <button type="submit" className='bg-blue-700 hover:bg-blue-800 transition-colors md:px-2 md:py-2 px-1 py-1 rounded-sm mt-2 text-white w-auto flex items-center'><span>Kaydet</span> <Arti /></button>
                     </div>
                 </form>
             </div>
