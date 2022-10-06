@@ -39,3 +39,8 @@ exports.registerUser = async (req, res) => {
         console.log(error)
     }
 }
+
+exports.loginUser = async (req, res) => {
+    const { username, password } = req.body;
+    console.log(username, password);
+}
