@@ -16,7 +16,11 @@ const authSlice = createSlice({
     name: "auth",
     initialState,
     reducers: {},
-    extraReducers: {}
+    extraReducers: {
+        [loginUser.rejected]: (state, action) => {
+            console.log(action.payload);
+        },
+    }
 })
 
 

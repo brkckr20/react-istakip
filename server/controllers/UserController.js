@@ -42,5 +42,12 @@ exports.registerUser = async (req, res) => {
 
 exports.loginUser = async (req, res) => {
     const { username, password } = req.body;
-    console.log(username, password);
+    try {
+        const user = await User.findOne({ username });
+        if (!user) {
+            res.status(400).send("Böyle bir kullanıcı bulunamadı!")
+        }
+    } catch (error) {
+
+    }
 }
