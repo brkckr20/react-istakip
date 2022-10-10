@@ -5,6 +5,7 @@ import Tables from './components/Tables';
 import { Switch, Route } from 'react-router-dom';
 import bg from './assets/bg.jpg';
 import ProtectedRoutes from './pages/ProtectedRoutes';
+import Register from './pages/Register';
 
 function App() {
   return (
@@ -13,6 +14,9 @@ function App() {
         <ProtectedRoutes exact path="/" component={HomePage} />
         <Route exact path="/giris">
           <Login />
+        </Route>
+        <Route exact path="/kayit">
+          <Register />
         </Route>
         {/* <Route exact path="/">
           <Navigation />

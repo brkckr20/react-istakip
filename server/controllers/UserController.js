@@ -26,15 +26,19 @@ exports.registerUser = async (req, res) => {
             res.status(400).json({
                 message: "Bu kullanıcı adı daha önce alınmış"
             });
+            return false;
+        } else {
+            const newUser = new User(req.body);
+            const salt = await bcrypt.genSalt(10);
+            newUser.password = await bcrypt.hash(password, salt);
+            await newUser.save();
+            res.status(200).json({
+                message: "İşlem başarılı.",
+                success: true,
+                newUser
+            })
         }
-        const newUser = new User(req.body);
-        const salt = await bcrypt.genSalt(10);
-        newUser.password = await bcrypt.hash(password, salt);
-        await newUser.save();
-        res.status(200).json({
-            message: "İşlem başarılı.",
-            newUser
-        })
+
     } catch (error) {
         console.log(error)
     }

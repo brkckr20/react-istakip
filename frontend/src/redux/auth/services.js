@@ -8,3 +8,12 @@ export const login = async (input) => {
         return error.response.data.message;
     }
 }
+
+export const register = async (input) => {
+    try {
+        const { data } = await axios.post(`${process.env.REACT_APP_BASE_ENDPOINT}/users/register`, input);
+        console.log(data);
+    } catch (error) {
+
+    }
+}
