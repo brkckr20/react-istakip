@@ -1,28 +1,45 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Toast, { error } from '../../components/Toast';
 import { loginUser } from '../../redux/auth/authSlice'
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 const Login = () => {
 
     const [username, setUserName] = useState("");
     const [password, setPassword] = useState("");
     const dispatch = useDispatch();
+    const history = useHistory();
+
+    const { user, errorMessage } = useSelector(state => state.auth);
+
 
     const values = {
         username,
         password
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (!username || !password) {
             error("Alanlar boş bırakılamaz");
         } else {
-            dispatch(loginUser(values))
+            await dispatch(loginUser(values))
         }
     }
+
+    useEffect(() => {
+        if (errorMessage) {
+            error("Böyle bir kullanıcı bulunamadı! \n Lütfen bilgileri kontrol edin.");
+        }
+    }, [errorMessage])
+
+
+    useEffect(() => {
+        if (user) {
+            history.push("/");
+        }
+    }, [user])
 
     return (
         <div className='min-h-screen flex items-center justify-center'>

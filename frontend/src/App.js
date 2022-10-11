@@ -30,7 +30,6 @@ function App() {
 }
 
 function HomePage(props) {
-  console.log(props);
   return (
     <>
       <Navigation />

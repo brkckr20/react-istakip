@@ -1,17 +1,18 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { login,register } from './services';
+import { login, register, logout } from './services';
 
-const user = JSON.parse(localStorage.getItem("onur_login"));
+const user = JSON.parse(localStorage.getItem("is_takip"));
 
 export const loginUser = createAsyncThunk("auth/login", login);
-export const registerUser = createAsyncThunk("auth/register", register)
+export const registerUser = createAsyncThunk("auth/register", register);
+export const logoutUser = createAsyncThunk("auth/logout", logout);
 
 const initialState = {
     user: user ? user : null,
-    errorMessage: "",
+    errorMessage: false,
     isLoading: false,
     isSuccess: false,
-    registerSuccess : false
+    registerSuccess: false
 }
 
 const authSlice = createSlice({
@@ -22,10 +23,23 @@ const authSlice = createSlice({
         [loginUser.rejected]: (state, action) => {
             console.log(action.payload);
         },
+        [loginUser.fulfilled]: (state, action) => {
+            if (action.payload.isSuccess === false) {
+                state.errorMessage = true;
+                return
+            }
+            state.user = action.payload;
+        },
 
         /* REGISTER */
-        [registerUser.fulfilled] : (state,action) => {
+        [registerUser.fulfilled]: (state, action) => {
             state.registerSuccess = true
+        },
+
+
+        /* LOGOUT */
+        [logoutUser.fulfilled]: (state, action) => {
+            state.user = null
         }
     }
 })

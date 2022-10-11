@@ -1,6 +1,17 @@
-import React from 'react'
+import React from 'react';
+import { logoutUser } from '../../redux/auth/authSlice';
+import { useDispatch } from 'react-redux';
 
-const index = () => {
+const Navigation = () => {
+    const dispatch = useDispatch();
+
+    function logout() {
+        if (window.confirm('You want to delette ?')) {
+            dispatch(logoutUser())
+        }
+
+    }
+
     return (
         <div className='py-2'>
             <div className="flex justify-end px-5">
@@ -10,17 +21,12 @@ const index = () => {
                         <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
                 </button>
-
-                <button className='bg-red-700 hover:bg-red-900 transition-colors p-2 rounded-xl text-white'>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-7">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-
+                <button className='bg-red-700 hover:bg-red-900 transition-colors p-2 rounded-xl text-white' onClick={logout}>
+                    <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 640 512" className='w-7' xmlns="http://www.w3.org/2000/svg"><path d="M624 448h-80V113.45C544 86.19 522.47 64 496 64H384v64h96v384h144c8.84 0 16-7.16 16-16v-32c0-8.84-7.16-16-16-16zM312.24 1.01l-192 49.74C105.99 54.44 96 67.7 96 82.92V448H16c-8.84 0-16 7.16-16 16v32c0 8.84 7.16 16 16 16h336V33.18c0-21.58-19.56-37.41-39.76-32.17zM264 288c-13.25 0-24-14.33-24-32s10.75-32 24-32 24 14.33 24 32-10.75 32-24 32z"></path></svg>
                 </button>
-
             </div>
         </div>
     )
 }
 
-export default index
+export default Navigation
