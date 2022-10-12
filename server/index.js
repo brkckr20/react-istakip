@@ -14,6 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 
 /* ROUTES */
 app.use("/users", require("./routes/UserRoute"));
+app.use("/company", require("./routes/CompanyRoute"));
 
 
 
