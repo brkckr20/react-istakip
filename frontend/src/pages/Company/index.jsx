@@ -56,7 +56,7 @@ const Company = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {companies.map((item, i) => (
+                        {companies?.map((item, i) => (
                             <tr key={item._id} className='text-center text-white bg-gray-700'>
                                 <td className='border border-slate-300'>{i + 1}</td>
                                 <td className='border border-slate-300'>{item.name}</td>
