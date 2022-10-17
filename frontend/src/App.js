@@ -19,6 +19,8 @@ function App() {
     if (!user) {
       history.push('/giris')
     }
+    
+    // eslint-disable-next-line
   }, [user])
 
   return (

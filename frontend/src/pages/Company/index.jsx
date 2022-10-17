@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { saveCompany, getAllCompany } from '../../redux/company/companySlice'
+import { /* saveCompany, */ getAllCompany } from '../../redux/company/companySlice'
 import { Sil } from '../../components/Icon';
 
+/* silinebilir  */
+import { usePost } from '../../hooks'
+
 const Company = () => {
-
-
 
     const [firma, setFirma] = useState("");
     const user = useSelector(state => state.auth.user);
@@ -16,14 +17,19 @@ const Company = () => {
         name: firma,
         user: user._id
     }
+    
+
+    const { postData } = usePost(`${process.env.REACT_APP_BASE_ENDPOINT}/company`, values)
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(saveCompany(values));
+        postData();
         setFirma("");
     }
 
     useEffect(() => {
         dispatch(getAllCompany());
+         // eslint-disable-next-line
     }, [companies])
 
     return (
