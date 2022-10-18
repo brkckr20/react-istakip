@@ -21,3 +21,15 @@ exports.getAllCompany = async (req, res) => {
         console.log(error)
     }
 }
+
+exports.deleteCompany = async (req, res) => {
+    try {
+        await Company.findByIdAndRemove(req.params.id);
+        res.status(200).json({
+            message: "Silme işlemi başarılı",
+            success: true,
+        })
+    } catch (error) {
+        console.log(error)
+    }
+}

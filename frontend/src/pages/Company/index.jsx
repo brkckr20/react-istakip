@@ -1,10 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { /* saveCompany, */ getAllCompany } from '../../redux/company/companySlice'
+import { /* saveCompany, */ getAllCompany, createCompany, removeCompany } from '../../redux/company/companySlice'
 import { Sil } from '../../components/Icon';
-
-/* silinebilir  */
-import { usePost } from '../../hooks'
 
 const Company = () => {
 
@@ -19,13 +16,15 @@ const Company = () => {
     }
     
 
-    const { postData } = usePost(`${process.env.REACT_APP_BASE_ENDPOINT}/company`, values)
-
     const handleSubmit = (e) => {
         e.preventDefault();
-        postData();
+        dispatch(createCompany(values));
         setFirma("");
     }
+
+    const handleDelete = (id) => [
+        dispatch(removeCompany(id))
+    ]
 
     useEffect(() => {
         dispatch(getAllCompany());
@@ -66,13 +65,11 @@ const Company = () => {
                             <tr key={item._id} className='text-center text-white bg-gray-700'>
                                 <td className='border border-slate-300'>{i + 1}</td>
                                 <td className='border border-slate-300'>{item.name}</td>
-                                <td className='border border-slate-300 flex items-center justify-center'><Sil /></td>
+                                <td className='border border-slate-300 flex items-center justify-center'><span onClick={() => handleDelete(item._id)}><Sil /></span></td>
                             </tr>
                         ))}
-
                     </tbody>
                 </table>
-
             </div>
         </div>
     )

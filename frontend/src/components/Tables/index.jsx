@@ -27,12 +27,10 @@ const Tables = () => {
             <div className='relative'>
                 <div className='mt-2'>
                     {
-                        companies.map(item => (
-                            <button key={item._id} className={`p-1 ${selectedTab === item.slug ? 'bg-green-900 text-white' : 'bg-gray-200'} mr-1`} onClick={() => changeTab(item.slug)}>{item.name}</button>
+                        companies.map((item,index) => (
+                            <button key={index} className={`p-1 ${selectedTab === item.slug ? 'bg-green-900 text-white' : 'bg-gray-200'} mr-1`} onClick={() => changeTab(item.slug)}>{item.name}</button>
                         ))
                     }
-                    {/* <button className={`p-1 ${selectedTab === 'hambez' ? 'bg-green-900 text-white' : 'bg-gray-200'} mr-1`} onClick={() => changeTab("hambez")}>Hambez</button> */}
-                    {/* <button className={`p-1 ${selectedTab === 'simteks' ? 'bg-green-900 text-white' : 'bg-gray-200'}`} onClick={() => changeTab("simteks")}>Simteks</button> */}
                 </div>
                 <div className={`${selectedTab === 'hambez' ? '' : 'hidden'} w-full`}>
                     <Product />
