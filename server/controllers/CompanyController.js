@@ -1,4 +1,5 @@
 const Company = require('../models/Company');
+let token;
 
 exports.createCompany = async (req, res) => {
     try {
@@ -14,8 +15,10 @@ exports.createCompany = async (req, res) => {
 }
 
 exports.getAllCompany = async (req, res) => {
+    token = JSON.parse(req["headers"].authorization);
+    let id = token._id;
     try {
-        const companies = await Company.find();
+        const companies = await Company.find({user : id});
         res.send(companies)
     } catch (error) {
         console.log(error)

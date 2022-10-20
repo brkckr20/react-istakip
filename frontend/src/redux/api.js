@@ -1,4 +1,4 @@
-import axios from "axios";
+/* import axios from 'axios';
 
 axios.interceptors.request.use(function (config) {
 
@@ -14,9 +14,4 @@ axios.interceptors.request.use(function (config) {
 }, function (error) {
     // Do something with request error
     return Promise.reject(error);
-});
-
-export const getAll = async () => {
-    const { data } = await axios.get(`${process.env.REACT_APP_BASE_ENDPOINT}/company`);
-    return data
-}
+}); */
