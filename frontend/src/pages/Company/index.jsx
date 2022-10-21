@@ -14,7 +14,7 @@ const Company = () => {
         name: firma,
         user: user._id
     }
-    
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -28,7 +28,7 @@ const Company = () => {
 
     useEffect(() => {
         dispatch(getAllCompany());
-         // eslint-disable-next-line
+        // eslint-disable-next-line
     }, [companies])
 
     return (

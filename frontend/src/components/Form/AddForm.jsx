@@ -1,7 +1,11 @@
 import React from 'react'
 import { Arti } from '../Icon'
+import { useSelector } from 'react-redux';
 
 const AddForm = () => {
+
+    const { companies } = useSelector(state => state.company);
+
     return (
         <div className='w-full'>
             <div className='mb-2'>
@@ -20,7 +24,12 @@ const AddForm = () => {
                             <input type="date" className='w-full outline-none p-1 pl-2 rounded-sm' placeholder='Ürün Metresi' />
                         </div>
                         <div>
-                            <input type="text" className='w-full outline-none p-1 pl-2 rounded-sm' placeholder='Firma Seçiniz' />
+                            <select className='w-full outline-none p-1 pl-2 rounded-sm'>
+                                <option disabled>Firma Seçiniz</option>
+                                {companies?.map(item => (
+                                    <option key={item._id} value={item.slug}>{item.name}</option>
+                                ))}
+                            </select>
                         </div>
                     </div>
                     <div className='flex justify-center'>

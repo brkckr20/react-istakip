@@ -19,7 +19,7 @@ function App() {
     if (!user) {
       history.push('/giris')
     }
-    
+
     // eslint-disable-next-line
   }, [user])
 
@@ -28,15 +28,16 @@ function App() {
       {user && (<Navigation />)}
       <Switch>
         <ProtectedRoutes exact path="/" component={HomePage} />
+        <ProtectedRoutes exact path="/firma" component={Company} />
         <Route exact path="/giris">
           <Login />
         </Route>
         <Route exact path="/kayit">
           <Register />
         </Route>
-        <Route exact path="/firma">
+        {/* <Route exact path="/firma">
           <Company />
-        </Route>
+        </Route> */}
       </Switch>
     </div>
   );
