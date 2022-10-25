@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { /* saveCompany, */ getAllCompany, createCompany, removeCompany } from '../../redux/company/companySlice'
+import { getAllCompany, createCompany, removeCompany } from '../../redux/company/companySlice'
 import { Sil } from '../../components/Icon';
 
 const Company = () => {

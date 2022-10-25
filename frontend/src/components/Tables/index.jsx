@@ -27,16 +27,14 @@ const Tables = () => {
             <div className='relative'>
                 <div className='mt-2'>
                     {
-                        companies.map((item,index) => (
+                        companies.map((item, index) => (
                             <button key={index} className={`p-1 ${selectedTab === item.slug ? 'bg-green-900 text-white' : 'bg-gray-200'} mr-1`} onClick={() => changeTab(item.slug)}>{item.name}</button>
                         ))
                     }
                 </div>
-                <div className={`${selectedTab === 'hambez' ? '' : 'hidden'} w-full`}>
-                    <Product />
-                </div>
-                <div className={`${selectedTab === 'simteks' ? '' : 'hidden'} text-white`}>
-                    simtex tablosu
+                <div className={` w-full`}>
+                    {/* ${selectedTab === 'hambez' ? '' : 'hidden'}  div in class'ı*/}
+                    <Product selectedTab={selectedTab} />
                 </div>
 
             </div>

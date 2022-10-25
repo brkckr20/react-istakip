@@ -3,13 +3,13 @@ import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
 import Login from './pages/Login'
-import Navigation from './components/Navigation'
-import Form from './components/Form'
-import Tables from './components/Tables';
+import Navigation from './components/Navigation';
 import bg from './assets/bg.jpg';
 import ProtectedRoutes from './pages/ProtectedRoutes';
+import Home from './pages/Home';
 import Register from './pages/Register';
 import Company from './pages/Company';
+
 
 function App() {
 
@@ -27,7 +27,7 @@ function App() {
     <div className='min-h-screen relative z-10' id='main' style={{ backgroundImage: `url(${bg})`, backgroundPosition: 'center', backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }}>
       {user && (<Navigation />)}
       <Switch>
-        <ProtectedRoutes exact path="/" component={HomePage} />
+        <ProtectedRoutes exact path="/" component={Home} />
         <ProtectedRoutes exact path="/firma" component={Company} />
         <Route exact path="/giris">
           <Login />
@@ -35,21 +35,9 @@ function App() {
         <Route exact path="/kayit">
           <Register />
         </Route>
-        {/* <Route exact path="/firma">
-          <Company />
-        </Route> */}
       </Switch>
     </div>
   );
-}
-
-function HomePage() {
-  return (
-    <>
-      <Form />
-      <Tables />
-    </>
-  )
 }
 
 export default App;
