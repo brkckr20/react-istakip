@@ -6,7 +6,8 @@ export const productSave = createAsyncThunk('product/save', newProduct);
 const productSlice = createSlice({
     name: "product",
     initialState: {
-        isLoading: false
+        isLoading: false,
+        isSuccess: false,
     },
     reducers: {},
     extraReducers: {
@@ -15,7 +16,7 @@ const productSlice = createSlice({
         },
         [productSave.fulfilled]: (state, action) => {
             state.isLoading = false;
-            console.log(action.payload);
+            state.isSuccess = true;
         }
     }
 })

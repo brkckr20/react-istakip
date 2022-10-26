@@ -13,6 +13,9 @@ const ProductSchema = new mongoose.Schema({
     company: {
         type: String
     },
+    date: {
+        type: Date,
+    },
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'

@@ -18,7 +18,7 @@ exports.getAllCompany = async (req, res) => {
     token = JSON.parse(req["headers"].authorization);
     let id = token._id;
     try {
-        const companies = await Company.find({user : id});
+        const companies = await Company.find({ user: id });
         res.send(companies)
     } catch (error) {
         console.log(error)

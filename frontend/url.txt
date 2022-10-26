@@ -1,1 +1,1 @@
-add form devam edilecek
+ürün kayit işlemi başarıyla tamamlandı ürün listelemeden devam et

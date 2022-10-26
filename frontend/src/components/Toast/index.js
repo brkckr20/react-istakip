@@ -4,6 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 export const error = (message) => toast.error(message);
+export const success = (message) => toast.success(message);
 
 
 const Toast = () => {
