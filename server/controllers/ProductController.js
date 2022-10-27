@@ -27,5 +27,15 @@ exports.saveProduct = async (req, res) => {
     } catch (error) {
         res.send(error)
     }
+}
 
+exports.getAllProduct = async (req, res) => {
+    token = JSON.parse(req["headers"].authorization);
+    let userId = token._id;
+    try {
+        const products = await Product.find({ user: userId });
+        res.status(200).send(products)
+    } catch (error) {
+        res.send(error)
+    }
 }

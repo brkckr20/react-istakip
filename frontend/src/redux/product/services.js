@@ -8,3 +8,12 @@ export const newProduct = async (input) => {
         console.log(err)
     }
 }
+
+export const getAllProducts = async () => {
+    try {
+        const { data } = await axios.get(`${process.env.REACT_APP_BASE_ENDPOINT}/product`);
+        return data;
+    } catch (error) {
+        console.log(error)
+    }
+}
