@@ -13,7 +13,7 @@ export const createCompany = createAsyncThunk("company/create", async (input) =>
     }
 })
 
-export const removeCompany = createAsyncThunk("company/remove", async ( id ) => {
+export const removeCompany = createAsyncThunk("company/remove", async (id) => {
     try {
         const response = await axios.delete(`${process.env.REACT_APP_BASE_ENDPOINT}/company/${id}`)
         return response.data;
@@ -46,6 +46,9 @@ const companySlice = createSlice({
         [removeCompany.fulfilled]: (state, action) => {
             state.isLoading = false;
             state.companies = [action.payload];
+        },
+        [getAllCompany.pending]: (state, action) => {
+            state.isLoading = true
         },
         [getAllCompany.fulfilled]: (state, action) => {
             state.isLoading = false

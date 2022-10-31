@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 import { Sil } from '../Icon';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProduct } from '../../redux/product/productSlice';
@@ -8,17 +8,26 @@ import trLocale from 'moment/locale/tr'
 const Product = ({ selectedTab }) => {
 
     const { isLoading, products } = useSelector(state => state.product);
+    //  const { companies, isLoading: companyLoading } = useSelector(state => state.company);
+
 
     const dispatch = useDispatch();
-    useState(() => {
+
+    useEffect(() => {
         moment.updateLocale("tr", trLocale);
         dispatch(getProduct())
-    }, [])
+    }, [dispatch])
+
+    // if (companyLoading) {
+    //     return (
+    //         <div>Yükleniyor</div>
+    //     )
+    // }
 
     return (
         <div className='grid grid-cols-1 md:grid-cols-2 mt-2 md:gap-x-2'>
             {
-                isLoading ? "Yükleniyor..." : (
+                isLoading ? <div>Yükleniyor...</div> : (
                     <>
                         <div>
                             <h4 className='text-white mb-2'>Gönderilen Bez ({selectedTab})</h4>

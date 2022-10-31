@@ -6,16 +6,21 @@ import Product from './Product';
 
 const Tables = () => {
 
-    const [selectedTab, setSelectedTab] = useState("hambez");
     const { companies } = useSelector(state => state.company);
+    const [selectedTab, setSelectedTab] = useState("");
     const dispatch = useDispatch();
 
     function changeTab(name) {
         setSelectedTab(name)
     }
 
+    async function changeTabSelected() {
+        await setSelectedTab(companies && companies[1].slug)
+    }
+
     useEffect(() => {
         dispatch(getAllCompany());
+        changeTabSelected();
         // eslint-disable-next-line
     }, [])
 
@@ -33,12 +38,9 @@ const Tables = () => {
                     }
                 </div>
                 <div className={` w-full`}>
-                    {/* ${selectedTab === 'hambez' ? '' : 'hidden'}  div in class'ı*/}
                     <Product selectedTab={selectedTab} />
                 </div>
-
             </div>
-
         </div>
     )
 }
