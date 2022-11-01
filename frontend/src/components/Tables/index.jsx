@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getAllCompany } from '../../redux/company/companySlice'
+import { getAllCompany } from '../../redux/company/companySlice';
 
 import Product from './Product';
 
 const Tables = () => {
 
     const { companies } = useSelector(state => state.company);
-    const [selectedTab, setSelectedTab] = useState("");
+    const { user } = useSelector(state => state.auth);
+    const [selectedTab, setSelectedTab] = useState(null);
     const dispatch = useDispatch();
 
     function changeTab(name) {
         setSelectedTab(name)
     }
 
-    async function changeTabSelected() {
-        await setSelectedTab(companies && companies[1].slug)
+    async function changeTabSelected(item) {
+        await setSelectedTab(item)
     }
 
     useEffect(() => {
@@ -38,7 +39,14 @@ const Tables = () => {
                     }
                 </div>
                 <div className={` w-full`}>
-                    <Product selectedTab={selectedTab} />
+                    {
+                        selectedTab ? (<Product selectedTab={selectedTab} />) : (
+                            <div className='text-gray-400 mt-2'>
+                                <span className='font-semibold text-white'>{user.username}</span>, sisteme hoş geldiniz. Sonuçları görmek için üst kısımdaki firma isimlerinden seçim yapınız.
+                            </div>
+                        )
+                    }
+
                 </div>
             </div>
         </div>

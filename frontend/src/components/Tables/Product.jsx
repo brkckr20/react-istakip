@@ -6,23 +6,24 @@ import moment from 'moment'
 import trLocale from 'moment/locale/tr'
 
 const Product = ({ selectedTab }) => {
-
     const { isLoading, products } = useSelector(state => state.product);
-    //  const { companies, isLoading: companyLoading } = useSelector(state => state.company);
-
-
     const dispatch = useDispatch();
+    const filteredData = products.filter(item => item.company === selectedTab);
+
+    const sumSendProductTotalMoney = filteredData.reduce((acc, object) => {
+        return acc + object.amount
+    }, 0)
+
+    const sumSendProductTotalMeter = filteredData.reduce((acc, object) => {
+        return acc + object.meter
+    }, 0)
+
 
     useEffect(() => {
         moment.updateLocale("tr", trLocale);
         dispatch(getProduct())
-    }, [dispatch])
-
-    // if (companyLoading) {
-    //     return (
-    //         <div>Yükleniyor</div>
-    //     )
-    // }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [selectedTab])
 
     return (
         <div className='grid grid-cols-1 md:grid-cols-2 mt-2 md:gap-x-2'>
@@ -43,7 +44,7 @@ const Product = ({ selectedTab }) => {
                                 </thead>
                                 <tbody>
                                     {
-                                        products?.map(product => (
+                                        filteredData?.map(product => (
                                             <tr key={product._id} className='text-center text-white bg-gray-700'>
                                                 <td className='border border-slate-300'>{product.unitPrice}</td>
                                                 <td className='border border-slate-300'>{product.meter}</td>
@@ -54,6 +55,15 @@ const Product = ({ selectedTab }) => {
                                         ))
                                     }
                                 </tbody>
+                                <tfoot>
+                                    <tr className='bg-white'>
+                                        <td>Toplam : </td>
+                                        <td className='text-center font-semibold'>{sumSendProductTotalMeter.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} mt</td>
+                                        <td className='text-center font-semibold'>{sumSendProductTotalMoney.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} tl</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tfoot>
                             </table>
                         </div>
 
