@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { Sil } from '../Icon';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProduct } from '../../redux/product/productSlice';
+import { getProduct, productRemove } from '../../redux/product/productSlice';
 import moment from 'moment'
 import trLocale from 'moment/locale/tr'
 
@@ -18,6 +18,9 @@ const Product = ({ selectedTab }) => {
         return acc + object.meter
     }, 0)
 
+    function remove(id) {
+        dispatch(productRemove(id));
+    }
 
     useEffect(() => {
         moment.updateLocale("tr", trLocale);
@@ -50,7 +53,7 @@ const Product = ({ selectedTab }) => {
                                                 <td className='border border-slate-300'>{product.meter}</td>
                                                 <td className='border border-slate-300'>{(product.amount).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} tl</td>
                                                 <td className='border border-slate-300'>{moment(product.date).format('L')}</td>
-                                                <td className='flex justify-center'><Sil /></td>
+                                                <td className='flex justify-center'><span className='flex items-center' onClick={() => remove(product._id)}><Sil /></span></td>
                                             </tr>
                                         ))
                                     }

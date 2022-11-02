@@ -17,3 +17,12 @@ export const getAllProducts = async () => {
         console.log(error)
     }
 }
+
+export const removeProduct = async (id) => {
+    try {
+        const { data } = await axios.delete(`${process.env.REACT_APP_BASE_ENDPOINT}/product/${id}`);
+        return data
+    } catch (err) {
+        console.log(err)
+    }
+}

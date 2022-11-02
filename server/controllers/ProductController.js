@@ -39,3 +39,17 @@ exports.getAllProduct = async (req, res) => {
         res.send(error)
     }
 }
+
+
+exports.removeProduct = async (req, res) => {
+    const { id } = req.params;
+    try {
+        await Product.findByIdAndRemove(id);
+        res.status(200).json({
+            message: "Silme işlemi başarılı",
+            success: true
+        })
+    } catch (error) {
+
+    }
+}

@@ -34,8 +34,8 @@ const AddForm = () => {
             setDate("");
             setCompany("");
         }
-
     }
+
 
     return (
         <div className='w-full'>
