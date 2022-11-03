@@ -24,7 +24,8 @@ const Product = ({ selectedTab }) => {
 
     useEffect(() => {
         moment.updateLocale("tr", trLocale);
-        dispatch(getProduct())
+        dispatch(getProduct());
+        console.log(products.length)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selectedTab])
 
@@ -33,7 +34,13 @@ const Product = ({ selectedTab }) => {
             {
                 isLoading ? <div>Yükleniyor...</div> : (
                     <>
-                        <div>
+                    {
+                        products.length < 1 ? (
+                            <div className='bg-yellow-600 flex items-center rounded-xl px-2'>
+                                <h1 className='text-white text-xl'>Kayıtlı ürün bulunamadı. Lütfen ekleme yapınız</h1>
+                            </div>
+                        ) : (
+                            <div>
                             <h4 className='text-white mb-2'>Gönderilen Bez ({selectedTab})</h4>
                             <table className='border-collapse border border-slate-400 mb-2 md:mb-0 w-full'>
                                 <thead>
@@ -69,6 +76,9 @@ const Product = ({ selectedTab }) => {
                                 </tfoot>
                             </table>
                         </div>
+                        )
+                    }
+                        
 
                         <div>
                             <h4 className='text-white mb-2'>Alınan Para Bez ({selectedTab})</h4>

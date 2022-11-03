@@ -1,4 +1,5 @@
 const Company = require('../models/Company');
+const Product = require("../models/Product");
 let token;
 
 exports.createCompany = async (req, res) => {
@@ -27,11 +28,16 @@ exports.getAllCompany = async (req, res) => {
 
 exports.deleteCompany = async (req, res) => {
     try {
+        const {slug} = await Company.findById(req.params.id);
         await Company.findByIdAndRemove(req.params.id);
-        res.status(200).json({
-            message: "Silme işlemi başarılı",
-            success: true,
-        })
+        await Product.find({company : slug}).remove(() => {
+            res.status(200).json({
+                message: "Silme işlemi başarılı",
+                success: true,
+            })
+        });
+
+        
     } catch (error) {
         console.log(error)
     }
