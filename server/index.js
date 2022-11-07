@@ -16,6 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/users", require("./routes/UserRoute"));
 app.use("/company", require("./routes/CompanyRoute"));
 app.use("/product", require("./routes/ProductRoute"));
+app.use("/money", require("./routes/MoneyRoute"));
 
 
 

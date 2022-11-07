@@ -1,9 +1,23 @@
 import React from 'react'
 import { Arti } from '../Icon'
 import { useSelector } from 'react-redux';
+import { useFormik } from 'formik';
 
 const MoneyForm = () => {
     const { companies } = useSelector(state => state.company);
+    const money = useSelector(state => state.money);
+
+    const formik = useFormik({
+        initialValues : {
+            receivedMoney : '',
+            description : '',
+            date : "",
+            company : ""
+        },
+        onSubmit : (values) => {
+            console.log(values);
+        }
+    })
 
     return (
         <div className='w-full md:pl-2'>
@@ -11,19 +25,19 @@ const MoneyForm = () => {
                 <h3 className='uppercase text-white text-center text-2xl'>Alınan para formu</h3>
             </div>
             <div>
-                <form>
+                <form onSubmit={formik.handleSubmit}>
                     <div className='grid md:grid-cols-2 grid-cols-1 gap-3'>
                         <div>
-                            <input type="text" className='w-full outline-none p-1 pl-2 rounded-sm' placeholder='Ürün Metresi' />
+                            <input type="text" name='receivedMoney' value={formik.values.receivedMoney} onChange={formik.handleChange} className='w-full outline-none p-1 pl-2 rounded-sm' placeholder='Alın Miktar' />
                         </div>
                         <div>
-                            <input type="text" className='w-full outline-none p-1 pl-2 rounded-sm' placeholder='Ürün Birim Fiyat' />
+                            <input type="text" name='description' value={formik.values.description} onChange={formik.handleChange} className='w-full outline-none p-1 pl-2 rounded-sm' placeholder='Açıklama' />
                         </div>
                         <div>
-                            <input type="date" className='w-full outline-none p-1 pl-2 rounded-sm' placeholder='Ürün Metresi' />
+                            <input type="date" name='date' value={formik.values.date} onChange={formik.handleChange} className='w-full outline-none p-1 pl-2 rounded-sm' />
                         </div>
                         <div>
-                            <select className='w-full outline-none p-1 pl-2 rounded-sm'>
+                            <select name='company' value={formik.values.company} onChange={formik.handleChange} className='w-full outline-none p-1 pl-2 rounded-sm'>
                                 <option disabled>Firma Seçiniz</option>
                                 {companies?.map(item => (
                                     <option key={item._id} value={item.slug}>{item.name}</option>

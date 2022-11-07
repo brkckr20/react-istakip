@@ -40,7 +40,7 @@ const AddForm = () => {
     return (
         <div className='w-full'>
             <div className='mb-2'>
-                <h3 className='uppercase text-white text-center text-2xl'>Para ekleme formu</h3>
+                <h3 className='uppercase text-white text-center text-2xl'>Bez ekleme formu</h3>
             </div>
             <Toast />
             <div>

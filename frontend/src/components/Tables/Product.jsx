@@ -25,7 +25,6 @@ const Product = ({ selectedTab }) => {
     useEffect(() => {
         moment.updateLocale("tr", trLocale);
         dispatch(getProduct());
-        console.log(products.length)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selectedTab])
 
@@ -36,8 +35,8 @@ const Product = ({ selectedTab }) => {
                     <>
                     {
                         products.length < 1 ? (
-                            <div className='bg-yellow-600 flex items-center rounded-xl px-2'>
-                                <h1 className='text-white text-xl'>Kayıtlı ürün bulunamadı. Lütfen ekleme yapınız</h1>
+                            <div className='px-1'>
+                                <h1 className='text-white text-md'>Kayıtlı ürün bulunamadı. Lütfen ekleme yapınız</h1>
                             </div>
                         ) : (
                             <div>
