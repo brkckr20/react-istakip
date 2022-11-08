@@ -1,18 +1,32 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { saveMoney } from './services'
+import { saveMoney, getMoney } from './services'
 
-export const save = createAsyncThunk("money/save", saveMoney)
+export const save = createAsyncThunk("money/save", saveMoney);
+export const get = createAsyncThunk("money/get", getMoney)
 
 const moneySlice = createSlice({
     name: "money",
     initialState: {
-        test: 1,
-        loading: true
+        loading: false,
+        moneys: []
     },
-    reducers: {},
+    reducers: {
+
+    },
     extraReducers: {
+        [save.pending]: (state, action) => {
+            state.loading = true;
+        },
         [save.fulfilled]: (state, action) => {
-            console.log(action.payload)
+            state.loading = false;
+            state.moneys = [action.payload];
+        },
+        [get.pending]: (state, action) => {
+            state.loading = true;
+        },
+        [get.fulfilled]: (state, action) => {
+            state.loading = false;
+            state.moneys = [...action.payload]
         }
     }
 })

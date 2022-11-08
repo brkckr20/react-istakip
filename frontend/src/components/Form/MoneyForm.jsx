@@ -1,21 +1,27 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Arti } from '../Icon'
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { save, get } from '../../redux/money/moneySlice'
 import { useFormik } from 'formik';
 
 const MoneyForm = () => {
     const { companies } = useSelector(state => state.company);
-    const money = useSelector(state => state.money);
+    const { moneys } = useSelector(state => state.money);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(get())
+    }, [])
 
     const formik = useFormik({
-        initialValues : {
-            receivedMoney : '',
-            description : '',
-            date : "",
-            company : ""
+        initialValues: {
+            receivedMoney: '',
+            description: '',
+            date: "",
+            company: ""
         },
-        onSubmit : (values) => {
-            console.log(values);
+        onSubmit: (values) => {
+            dispatch(save(values))
         }
     })
 
@@ -28,7 +34,7 @@ const MoneyForm = () => {
                 <form onSubmit={formik.handleSubmit}>
                     <div className='grid md:grid-cols-2 grid-cols-1 gap-3'>
                         <div>
-                            <input type="text" name='receivedMoney' value={formik.values.receivedMoney} onChange={formik.handleChange} className='w-full outline-none p-1 pl-2 rounded-sm' placeholder='Alın Miktar' />
+                            <input type="text" name='receivedMoney' value={formik.values.receivedMoney} onChange={formik.handleChange} className='w-full outline-none p-1 pl-2 rounded-sm' placeholder='Alınan Para Tutarı' />
                         </div>
                         <div>
                             <input type="text" name='description' value={formik.values.description} onChange={formik.handleChange} className='w-full outline-none p-1 pl-2 rounded-sm' placeholder='Açıklama' />

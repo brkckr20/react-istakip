@@ -1,10 +1,37 @@
 const Money = require("../models/Money");
 
-exports.saveMoney = async (req,res) => {
+let token;
+
+exports.saveMoney = async (req, res) => {
+    token = JSON.parse(req["headers"].authorization);
+    let user_id = token._id;
+    const { receivedMoney, description, company, date } = req.body;
+    const values = {
+        receivedMoney,
+        description,
+        company,
+        date,
+        user: user_id
+    }
     try {
-        console.log("money post isteği");
-        res.send();
+        const money = new Money(values);
+        await money.save();
+        res.status(200).json({
+            message: "Kayıt işlemi başarılı.",
+            success: true
+        });
     } catch (error) {
-        
+        console.log(error)
+    }
+}
+
+exports.getMoney = async (req, res) => {
+    token = JSON.parse(req["headers"].authorization);
+    let user_id = token._id;
+    try {
+        const moneys = await Money.find({ user: user_id });
+        res.status(200).send(moneys);
+    } catch (error) {
+        console.log(error)
     }
 }
