@@ -10,6 +10,7 @@ const Product = ({ selectedTab }) => {
     const { moneys } = useSelector(state => state.money);
     const dispatch = useDispatch();
     const filteredData = products.filter(item => item.company === selectedTab);
+    const filteredMoney = moneys.filter(item => item.company === selectedTab)
 
     const sumSendProductTotalMoney = filteredData.reduce((acc, object) => {
         return acc + object.amount
@@ -61,7 +62,7 @@ const Product = ({ selectedTab }) => {
                                                         <td className='border border-slate-300'>{product.meter}</td>
                                                         <td className='border border-slate-300'>{(product.amount).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} tl</td>
                                                         <td className='border border-slate-300'>{moment(product.date).format('L')}</td>
-                                                        <td className='flex justify-center'><span className='flex items-center' onClick={() => remove(product._id)}><Sil /></span></td>
+                                                        <td className='flex justify-center border border-slate-300'><span className='flex items-center' onClick={() => remove(product._id)}><Sil /></span></td>
                                                     </tr>
                                                 ))
                                             }
@@ -94,12 +95,12 @@ const Product = ({ selectedTab }) => {
                                 </thead>
                                 <tbody>
                                     {
-                                        moneys.map((item,index) => (
+                                        filteredMoney.map((item, index) => (
                                             <tr key={index} className='text-center text-white bg-gray-700'>
-                                                <td>{item.receivedMoney}</td>
-                                                <td>{item.description}</td>
-                                                <td>{moment(item.date).format('L')}</td>
-                                                <td className='flex justify-center'><Sil /></td>
+                                                <td className='border border-slate-300'>{item.receivedMoney}</td>
+                                                <td className='border border-slate-300'>{item.description}</td>
+                                                <td className='border border-slate-300'>{moment(item.date).format('L')}</td>
+                                                <td className='flex justify-center border border-slate-300'><Sil /></td>
                                             </tr>
                                         ))
                                     }

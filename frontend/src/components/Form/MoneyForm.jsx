@@ -3,15 +3,16 @@ import { Arti } from '../Icon'
 import { useSelector, useDispatch } from 'react-redux';
 import { save, get } from '../../redux/money/moneySlice'
 import { useFormik } from 'formik';
+import Toast, { error } from '../Toast';
 
 const MoneyForm = () => {
     const { companies } = useSelector(state => state.company);
-    const { moneys } = useSelector(state => state.money);
+    // const { moneys } = useSelector(state => state.money);
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(get())
-    }, [])
+    }, [dispatch])
 
     const formik = useFormik({
         initialValues: {
@@ -20,8 +21,14 @@ const MoneyForm = () => {
             date: "",
             company: ""
         },
-        onSubmit: (values) => {
-            dispatch(save(values))
+        onSubmit: (values, { resetForm }) => {
+            if (!values.receivedMoney || !values.receivedMoney || !values.receivedMoney || !values.receivedMoney) {
+                error("Lütfen tüm alanları doldurunuz!");
+                return;
+            } else {
+                dispatch(save(values))
+                resetForm();
+            }
         }
     })
 
@@ -30,6 +37,7 @@ const MoneyForm = () => {
             <div className='mb-2'>
                 <h3 className='uppercase text-white text-center text-2xl'>Alınan para formu</h3>
             </div>
+            <Toast />
             <div>
                 <form onSubmit={formik.handleSubmit}>
                     <div className='grid md:grid-cols-2 grid-cols-1 gap-3'>
@@ -44,7 +52,7 @@ const MoneyForm = () => {
                         </div>
                         <div>
                             <select name='company' value={formik.values.company} onChange={formik.handleChange} className='w-full outline-none p-1 pl-2 rounded-sm'>
-                                <option disabled>Firma Seçiniz</option>
+                                <option selected>Firma Seçiniz</option>
                                 {companies?.map(item => (
                                     <option key={item._id} value={item.slug}>{item.name}</option>
                                 ))}
