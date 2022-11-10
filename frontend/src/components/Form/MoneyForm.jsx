@@ -52,7 +52,7 @@ const MoneyForm = () => {
                         </div>
                         <div>
                             <select name='company' value={formik.values.company} onChange={formik.handleChange} className='w-full outline-none p-1 pl-2 rounded-sm'>
-                                <option selected>Firma Seçiniz</option>
+                                <option>Firma Seçiniz</option>
                                 {companies?.map(item => (
                                     <option key={item._id} value={item.slug}>{item.name}</option>
                                 ))}

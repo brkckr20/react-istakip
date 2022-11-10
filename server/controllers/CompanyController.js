@@ -28,16 +28,14 @@ exports.getAllCompany = async (req, res) => {
 
 exports.deleteCompany = async (req, res) => {
     try {
-        const {slug} = await Company.findById(req.params.id);
+        const { slug } = await Company.findById(req.params.id);
         await Company.findByIdAndRemove(req.params.id);
-        await Product.find({company : slug}).remove(() => {
+        Product.find({ company: slug }).deleteOne(() => {
             res.status(200).json({
                 message: "Silme işlemi başarılı",
                 success: true,
             })
         });
-
-        
     } catch (error) {
         console.log(error)
     }

@@ -28,7 +28,7 @@ const Tables = () => {
     return (
         <div className='w-full px-3 md:px-5 mt-4'>
             <div>
-                <h1 className='text-white border-b border-b-gray-700'>Liste</h1>
+                <h1 className='text-white border-b border-b-gray-700'>Firma Listesi w</h1>
             </div>
             <div className='relative'>
                 <div className='mt-2'>
@@ -46,7 +46,6 @@ const Tables = () => {
                             </div>
                         )
                     }
-
                 </div>
             </div>
         </div>

@@ -22,6 +22,7 @@ export const removeCompany = createAsyncThunk("company/remove", async (id) => {
     }
 })
 
+
 const initialState = {
     isSuccess: false,
     isLoading: false,

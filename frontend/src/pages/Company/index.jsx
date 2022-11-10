@@ -3,10 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAllCompany, createCompany, removeCompany } from '../../redux/company/companySlice'
 import { Sil } from '../../components/Icon';
 
+
 const Company = () => {
 
     const [firma, setFirma] = useState("");
-    const user = useSelector(state => state.auth.user);
+    const { user } = useSelector(state => state.auth);
     const { companies, isLoading } = useSelector(state => state.company);
     const dispatch = useDispatch();
 
@@ -55,14 +56,14 @@ const Company = () => {
                 <table className='border-collapse border border-slate-400 mb-2 md:mb-0 w-full max-w-[414px]'>
                     <thead>
                         <tr className='bg-gray-400  text-center'>
-                            <td>Sıra</td>
+                            <td>Sıra #</td>
                             <td>Firma Adı</td>
                             <td>İşlem</td>
                         </tr>
                     </thead>
                     <tbody>
                         {companies?.map((item, i) => (
-                            <tr key={item._id} className='text-center text-white bg-gray-700'>
+                            <tr key={i} className='text-center text-white bg-gray-700'>
                                 <td className='border border-slate-300'>{i + 1}</td>
                                 <td className='border border-slate-300'>{item.name}</td>
                                 <td className='border border-slate-300 flex items-center justify-center'><span onClick={() => handleDelete(item._id)}><Sil /></span></td>
