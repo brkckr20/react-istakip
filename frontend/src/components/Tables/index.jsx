@@ -6,7 +6,7 @@ import Product from './Product';
 
 const Tables = () => {
 
-    const { companies } = useSelector(state => state.company);
+    const { companies, selectCompany } = useSelector(state => state.company);
     const { user } = useSelector(state => state.auth);
     const [selectedTab, setSelectedTab] = useState(null);
     const dispatch = useDispatch();
@@ -15,20 +15,21 @@ const Tables = () => {
         setSelectedTab(name)
     }
 
-    async function changeTabSelected(item) {
-        await setSelectedTab(item)
+    function changeTabSelected(item) {
+        setSelectedTab(item)
     }
 
     useEffect(() => {
         dispatch(getAllCompany());
-        changeTabSelected();
+        changeTabSelected(selectCompany);
+
         // eslint-disable-next-line
-    }, [])
+    }, [selectCompany])
 
     return (
         <div className='w-full px-3 md:px-5 mt-4'>
             <div>
-                <h1 className='text-white border-b border-b-gray-700'>Firma Listesi w</h1>
+                <h1 className='text-white border-b border-b-gray-700'>Firma Listesi</h1>
             </div>
             <div className='relative'>
                 <div className='mt-2'>

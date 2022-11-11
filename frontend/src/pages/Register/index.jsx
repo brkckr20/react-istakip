@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import Toast, { error } from '../../components/Toast';
 import { registerUser } from '../../redux/auth/authSlice'
 import { Link, useHistory } from 'react-router-dom';
@@ -10,7 +10,6 @@ const Login = () => {
     const [password, setPassword] = useState("");
     const [passwordRepeat, setPasswordRepeat] = useState("");
     const dispatch = useDispatch();
-    const { registerSuccess } = useSelector(s => s.auth)
     const history = useHistory();
 
     const values = {
@@ -28,9 +27,7 @@ const Login = () => {
             error("Şifreler eşleşmiyor!");
         } else {
             dispatch(registerUser(values))
-            if (registerSuccess) {
-                history.push("/giris");
-            }
+            history.push("/giris");
         }
     }
 

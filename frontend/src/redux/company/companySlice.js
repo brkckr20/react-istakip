@@ -26,7 +26,8 @@ export const removeCompany = createAsyncThunk("company/remove", async (id) => {
 const initialState = {
     isSuccess: false,
     isLoading: false,
-    companies: []
+    companies: [],
+    selectCompany: ""
 }
 
 const companySlice = createSlice({
@@ -52,8 +53,11 @@ const companySlice = createSlice({
             state.isLoading = true
         },
         [getAllCompany.fulfilled]: (state, action) => {
-            state.isLoading = false
             state.companies = action.payload
+            const val = action.payload;
+            state.selectCompany = val[0].slug
+            state.isLoading = false;
+
         },
     }
 })
