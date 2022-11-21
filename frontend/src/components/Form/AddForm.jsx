@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Arti } from '../Icon'
 import { useSelector, useDispatch } from 'react-redux';
-import { productSave } from '../../redux/product/productSlice';
+import { productSave, getProduct } from '../../redux/product/productSlice';
 import Toast, { error, success } from '../../components/Toast';
+
 
 const AddForm = () => {
 
@@ -34,6 +35,7 @@ const AddForm = () => {
             setDate("");
             setCompany("");
         }
+        dispatch(getProduct());
     }
 
 

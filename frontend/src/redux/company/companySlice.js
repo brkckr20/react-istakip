@@ -55,7 +55,7 @@ const companySlice = createSlice({
         [getAllCompany.fulfilled]: (state, action) => {
             state.companies = action.payload
             const val = action.payload;
-            state.selectCompany = val[0].slug
+            state.selectCompany = val[0]?.slug
             state.isLoading = false;
 
         },

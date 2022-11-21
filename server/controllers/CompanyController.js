@@ -11,7 +11,7 @@ exports.createCompany = async (req, res) => {
             success: true
         })
     } catch (error) {
-        res.send(error)
+        console.log(error.message)
     }
 }
 

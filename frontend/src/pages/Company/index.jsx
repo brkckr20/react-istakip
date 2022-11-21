@@ -2,13 +2,13 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllCompany, createCompany, removeCompany } from '../../redux/company/companySlice'
 import { Sil } from '../../components/Icon';
-
+import Toast, { error, success } from '../../components/Toast';
 
 const Company = () => {
 
     const [firma, setFirma] = useState("");
     const { user } = useSelector(state => state.auth);
-    const { companies, isLoading } = useSelector(state => state.company);
+    const { companies } = useSelector(state => state.company);
     const dispatch = useDispatch();
 
     const values = {
@@ -19,7 +19,12 @@ const Company = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        if (!values.name) {
+            error("Firma isim bilgisi boş geçilemez!");
+            return
+        }
         dispatch(createCompany(values));
+        success("Firma kayıt işlemi başarılı.");
         setFirma("");
     }
 
@@ -48,11 +53,6 @@ const Company = () => {
             </form>
             <div className='mt-5'>
                 <h2 className='text-white text-xl md:text-3xl'>Mevcut Firma Listesi</h2>
-                {
-                    isLoading && (
-                        <div className='text-white'>Yükleniyor</div>
-                    )
-                }
                 <table className='border-collapse border border-slate-400 mb-2 md:mb-0 w-full max-w-[414px]'>
                     <thead>
                         <tr className='bg-gray-400  text-center'>
@@ -72,6 +72,7 @@ const Company = () => {
                     </tbody>
                 </table>
             </div>
+            <Toast />
         </div>
     )
 }
