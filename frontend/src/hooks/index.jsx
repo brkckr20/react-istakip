@@ -16,13 +16,14 @@ const usePost = (url, input) => {
     }
 }
 
-const useFetch = (url) => {
+const useFetch = (URL) => {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+
     const fetchData = async () => {
         try {
-            const { data: responseData } = await axios.get(url);
+            const { data: responseData } = await axios.get(URL);
             setData(responseData);
             setLoading(false);
         } catch (err) {
@@ -30,6 +31,10 @@ const useFetch = (url) => {
             setLoading(false);
         }
     }
+
+    useEffect(() => {
+        fetchData();
+    }, [])
 
     return {
         data,

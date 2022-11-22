@@ -35,21 +35,21 @@ const companySlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: {
-        [createCompany.pending]: (state, action) => {
+        [createCompany.pending]: (state) => {
             state.isLoading = true;
         },
         [createCompany.fulfilled]: (state, action) => {
             state.isLoading = false;
             state.companies = [action.payload];
         },
-        [removeCompany.pending]: (state, action) => {
+        [removeCompany.pending]: (state) => {
             state.isLoading = true;
         },
         [removeCompany.fulfilled]: (state, action) => {
             state.isLoading = false;
             state.companies = [action.payload];
         },
-        [getAllCompany.pending]: (state, action) => {
+        [getAllCompany.pending]: (state) => {
             state.isLoading = true
         },
         [getAllCompany.fulfilled]: (state, action) => {

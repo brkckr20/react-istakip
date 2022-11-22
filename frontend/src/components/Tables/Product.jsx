@@ -22,6 +22,7 @@ const Product = ({ selectedTab }) => {
 
     function remove(id) {
         dispatch(productRemove(id));
+        dispatch(getProduct());
     }
 
     useEffect(() => {
