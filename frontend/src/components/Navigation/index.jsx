@@ -4,9 +4,12 @@ import { useDispatch } from 'react-redux';
 import { logoutUser } from '../../redux/auth/authSlice';
 import { Confirm } from 'notiflix/build/notiflix-confirm-aio';
 import { Home } from '../Icon';
+import { MenuIcon, CloseIcon } from '../Icon'
 
 const Navigation = () => {
     const dispatch = useDispatch();
+
+    const [menuOpen, setMenuOpen] = React.useState(false)
 
     function cikis() {
         Confirm.show(
@@ -29,7 +32,39 @@ const Navigation = () => {
 
 
     return (
-        <div className='py-2'>
+        <>
+            <div className='p-3 text-white bg-gray-700  fixed right-0 left-0 top-0'>
+                <div className='flex items-center justify-between'>
+                    <div className='uppercase'>username</div>
+                    <div className='block md:hidden bg-gray-500 p-1 rounded-full' onClick={() => setMenuOpen(!menuOpen)}>
+                        <MenuIcon />
+                    </div>
+                </div>
+            </div>
+            <div className={menuOpen && 'fixed inset-0 bg-black/70 z-[1002]'}>
+                <div className={`text-white fixed inset-0 bg-gray-900 w-3/4 p-3 duration-300 ease-in-out ${menuOpen ? 'left-0' : 'left-[-100%]'}`}>
+                    <div className='flex items-center justify-between'>
+                        <div className='uppercase'>username</div>
+                        <div className='block md:hidden bg-gray-500 p-1 rounded-full' onClick={() => setMenuOpen(!menuOpen)}>
+                            <CloseIcon />
+                        </div>
+                    </div>
+                    <div>
+                        <ul>
+                            <li>Menü Listesi</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </>
+    )
+}
+
+export default Navigation
+
+
+/*
+<div className='py-2'>
             <div className="flex justify-end px-5">
                 <Link to="/" className='bg-green-700 hover:bg-green-900 transition-colors p-2 rounded-xl text-white mr-1'>
                     <Home />
@@ -45,7 +80,5 @@ const Navigation = () => {
                 </button>
             </div>
         </div>
-    )
-}
 
-export default Navigation
+*/
