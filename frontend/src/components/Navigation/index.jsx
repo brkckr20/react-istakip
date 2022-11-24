@@ -1,14 +1,17 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser } from '../../redux/auth/authSlice';
 import { Confirm } from 'notiflix/build/notiflix-confirm-aio';
-import { Home } from '../Icon';
-import { MenuIcon, CloseIcon } from '../Icon'
+import { MenuIcon, CloseIcon, LogoutIcon } from '../Icon'
+import MenuItem from './MenuItem';
+
+import { useFetch } from '../../hooks';
 
 const Navigation = () => {
-    const dispatch = useDispatch();
 
+    const { data, error, loading } = useFetch(`${process.env.REACT_APP_BASE_ENDPOINT}/company`);
+    const dispatch = useDispatch();
+    const {user} = useSelector(s => s.auth);
     const [menuOpen, setMenuOpen] = React.useState(false)
 
     function cikis() {
@@ -30,14 +33,32 @@ const Navigation = () => {
         );
     }
 
+    if (loading) {
+        return (
+            <div>Yükleniyor</div>
+        )
+    }
+
+    if (error) {
+        return (
+            <div>Hata</div>
+        )
+    }
+
 
     return (
         <>
             <div className='p-3 text-white bg-gray-700  fixed right-0 left-0 top-0'>
                 <div className='flex items-center justify-between'>
-                    <div className='uppercase'>username</div>
-                    <div className='block md:hidden bg-gray-500 p-1 rounded-full' onClick={() => setMenuOpen(!menuOpen)}>
-                        <MenuIcon />
+                    <div className='uppercase'>{user.username}</div>
+                    <div className='flex'>
+
+                        <div className='block mr-3 md:hidden bg-red-500 p-1 rounded-full' onClick={cikis}>
+                            <LogoutIcon />
+                        </div>
+                        <div className='block md:hidden bg-gray-500 p-1 rounded-full' onClick={() => setMenuOpen(!menuOpen)}>
+                            <MenuIcon />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -49,9 +70,15 @@ const Navigation = () => {
                             <CloseIcon />
                         </div>
                     </div>
+
                     <div>
                         <ul>
-                            <li>Menü Listesi</li>
+                            {
+                                data.map(item => (
+                                    <MenuItem key={item._id} item={item} />
+                                ))
+                            }
+
                         </ul>
                     </div>
                 </div>
