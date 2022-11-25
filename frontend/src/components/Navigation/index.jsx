@@ -6,12 +6,13 @@ import { MenuIcon, CloseIcon, LogoutIcon } from '../Icon'
 import MenuItem from './MenuItem';
 
 import { useFetch } from '../../hooks';
+import { Link } from 'react-router-dom';
 
 const Navigation = () => {
 
     const { data, error, loading } = useFetch(`${process.env.REACT_APP_BASE_ENDPOINT}/company`);
     const dispatch = useDispatch();
-    const {user} = useSelector(s => s.auth);
+    const { user } = useSelector(s => s.auth);
     const [menuOpen, setMenuOpen] = React.useState(false)
 
     function cikis() {
@@ -65,7 +66,7 @@ const Navigation = () => {
             <div className={menuOpen && 'fixed inset-0 bg-black/70 z-[1002]'}>
                 <div className={`text-white fixed inset-0 bg-gray-900 w-3/4 p-3 duration-300 ease-in-out ${menuOpen ? 'left-0' : 'left-[-100%]'}`}>
                     <div className='flex items-center justify-between'>
-                        <div className='uppercase'>username</div>
+                        <div className='uppercase'>{user.username}</div>
                         <div className='block md:hidden bg-gray-500 p-1 rounded-full' onClick={() => setMenuOpen(!menuOpen)}>
                             <CloseIcon />
                         </div>
@@ -73,11 +74,16 @@ const Navigation = () => {
 
                     <div>
                         <ul>
-                            {
-                                data.map(item => (
-                                    <MenuItem key={item._id} item={item} />
-                                ))
-                            }
+                            <>
+                                <li className='bg-gray-100 p-2 mt-3 w-full block' onClick={() => setMenuOpen(!menuOpen)}>
+                                    <Link to="/" className='text-black'>Anasayfa</Link>
+                                </li>
+                                {
+                                    data.map(item => (
+                                        <MenuItem key={item._id} item={item} menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+                                    ))
+                                }
+                            </>
 
                         </ul>
                     </div>

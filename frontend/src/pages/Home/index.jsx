@@ -6,7 +6,7 @@ import Main from '../Main';
 const Home = () => {
     return (
         <>
-        <Main />
+            <Main />
             {/* <Form />
             <Tables /> */}
         </>

@@ -9,6 +9,7 @@ import ProtectedRoutes from './pages/ProtectedRoutes';
 import Home from './pages/Home';
 import Register from './pages/Register';
 import Company from './pages/Company';
+import CompanyDetail from './pages/CompanyDetail';
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
       <Switch>
         <ProtectedRoutes exact path="/" component={Home} />
         <ProtectedRoutes exact path="/firma" component={Company} />
+        <ProtectedRoutes exact path="/firma/:slug" component={CompanyDetail} />
         <Route exact path="/giris">
           <Login />
         </Route>
