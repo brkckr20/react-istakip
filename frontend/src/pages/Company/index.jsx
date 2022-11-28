@@ -38,7 +38,7 @@ const Company = () => {
     }, [companies])
 
     return (
-        <div className='px-2 mx-auto'>
+        <div className='px-2 pt-16 mx-auto'>
             <div className='text-white text-xl md:text-3xl mb-3'>
                 <h1>Firma Ekleme Paneli</h1>
             </div>

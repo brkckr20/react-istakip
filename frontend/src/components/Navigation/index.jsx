@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser } from '../../redux/auth/authSlice';
 import { Confirm } from 'notiflix/build/notiflix-confirm-aio';
-import { MenuIcon, CloseIcon, LogoutIcon } from '../Icon'
+import { MenuIcon, CloseIcon, LogoutIcon, SettingsIcon } from '../Icon'
 import MenuItem from './MenuItem';
 
 import { useFetch } from '../../hooks';
@@ -75,7 +75,7 @@ const Navigation = () => {
                     <div>
                         <ul>
                             <>
-                                <li className='bg-gray-100 p-2 mt-3 w-full block' onClick={() => setMenuOpen(!menuOpen)}>
+                                <li className='bg-gray-100 rounded-lg p-2 mt-3 w-full block' onClick={() => setMenuOpen(!menuOpen)}>
                                     <Link to="/" className='text-black'>Anasayfa</Link>
                                 </li>
                                 {
@@ -83,6 +83,10 @@ const Navigation = () => {
                                         <MenuItem key={item._id} item={item} menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
                                     ))
                                 }
+                                <li className='bg-red-800 rounded-lg p-2 mt-3 w-full flex gap-x-2' onClick={() => setMenuOpen(!menuOpen)}>
+                                    <SettingsIcon fill="white" />
+                                    <Link to="/firma" className='text-white'>Ayarlar</Link>
+                                </li>
                             </>
 
                         </ul>
