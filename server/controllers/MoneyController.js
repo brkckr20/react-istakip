@@ -35,3 +35,15 @@ exports.getMoney = async (req, res) => {
         console.log(error)
     }
 }
+exports.deleteMoney = async (req, res) => {
+    const { id } = req.params;
+    try {
+        await Money.findByIdAndRemove(id);
+        res.status(200).json({
+            message: "Silme işlemi başarılı",
+            success: true
+        })
+    } catch (error) {
+
+    }
+}

@@ -14,7 +14,7 @@ const ProductSchema = new mongoose.Schema({
         type: String
     },
     date: {
-        type: Date,
+        type: Date
     },
     user: {
         type: mongoose.Schema.Types.ObjectId,
