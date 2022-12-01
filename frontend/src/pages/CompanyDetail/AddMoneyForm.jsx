@@ -5,7 +5,7 @@ import { usePost } from '../../hooks';
 
 
 
-const AddMoneyForm = ({ slug, success }) => {
+const AddMoneyForm = ({ slug, success, error }) => {
 
     const { postData } = usePost()
 
@@ -18,9 +18,13 @@ const AddMoneyForm = ({ slug, success }) => {
         },
 
         onSubmit: (values, bag) => {
-            postData(`${process.env.REACT_APP_BASE_ENDPOINT}/money`, values);
-            bag.resetForm();
-            success("Alınan para başarıyla kaydedildi")
+            if (!values.receivedMoney || !values.description || !values.date) {
+                return error("Alanlar boş geçilemez!!!");
+            } else {
+                postData(`${process.env.REACT_APP_BASE_ENDPOINT}/money`, values);
+                bag.resetForm();
+                success("Alınan para başarıyla kaydedildi")
+            }
         }
     });
 
