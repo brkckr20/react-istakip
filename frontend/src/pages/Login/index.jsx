@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Toast, { error } from '../../components/Toast';
 import { loginUser } from '../../redux/auth/authSlice'
 import { Link, useHistory } from 'react-router-dom';
+import errorMessageParser from '../../utils/errorMessageParser';
 
 const Login = () => {
 
@@ -11,7 +12,7 @@ const Login = () => {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const { user, errorMessage } = useSelector(state => state.auth);
+    const { user, errorMessage, isError } = useSelector(state => state.auth);
 
 
     const values = {
@@ -23,16 +24,19 @@ const Login = () => {
         e.preventDefault();
         if (!username || !password) {
             error("Alanlar boş bırakılamaz");
-        } else {
+        } else if (isError) {
+            error(errorMessageParser(errorMessage));
+        }
+        else {
             await dispatch(loginUser(values))
         }
     }
 
     useEffect(() => {
-        if (errorMessage) {
-            error("Böyle bir kullanıcı bulunamadı! \n Lütfen bilgileri kontrol edin.");
+        if (isError) {
+            error(errorMessageParser(errorMessage));
         }
-    }, [errorMessage])
+    }, [isError])
 
 
     useEffect(() => {

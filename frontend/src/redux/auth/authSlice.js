@@ -9,9 +9,10 @@ export const logoutUser = createAsyncThunk("auth/logout", logout);
 
 const initialState = {
     user: user ? user : null,
-    errorMessage: false,
+    errorMessage: "",
     isLoading: false,
     isSuccess: false,
+    isError: false,
     registerSuccess: false
 }
 
@@ -24,11 +25,12 @@ const authSlice = createSlice({
             console.log(action.payload);
         },
         [loginUser.fulfilled]: (state, action) => {
-            if (action.payload.isSuccess === false) {
-                state.errorMessage = true;
-                return
+            if (action.payload.code === "auth/user-not-found") {
+                state.isError = true;
+                state.errorMessage = action.payload.code;
+            } else {
+                state.user = action.payload;
             }
-            state.user = action.payload;
         },
 
         /* REGISTER */

@@ -8,7 +8,7 @@ export const login = async (input) => {
         }
         return data;
     } catch (error) {
-        return error.response.data.message;
+        return error.response.data;
     }
 }
 

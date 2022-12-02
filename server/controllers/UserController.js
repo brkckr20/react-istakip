@@ -49,8 +49,19 @@ exports.loginUser = async (req, res) => {
     const { username, password } = req.body;
     const user = await User.findOne({ username });
     if (!user) {
-        res.send({ isSuccess: false })
+        await res.status(400).json({
+            code: "auth/user-not-found",
+        })
     }
+
+
+    if (user && !(await bcrypt.compare(password, user.password))) {
+        (await bcrypt.compare(password, user.password))
+        res.status(400).json({
+            message: "Şifre hatalı. Kontrol ediniz!"
+        })
+    }
+
     if (user && (await bcrypt.compare(password, user.password))) {
         res.status(200).json({
             _id: user._id,
