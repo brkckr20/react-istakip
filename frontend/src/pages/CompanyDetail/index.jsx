@@ -61,14 +61,8 @@ const CompanyDetail = () => {
                 </button>
             </div>
             <div className='mx-2'>
-                <h3 className='text-white'>Bakiye Durumu</h3>
+                <h3 className='text-white'>Genel Bakiye Durumu</h3>
                 <BakiyeCard summary={summary} />
-                {/* <pre className='text-white'>
-
-                    {
-                        JSON.stringify(filteredData[0], null, 2)
-                    }
-                </pre> */}
             </div>
         </div >
     )
