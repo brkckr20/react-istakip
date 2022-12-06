@@ -25,8 +25,9 @@ const authSlice = createSlice({
             console.log(action.payload);
         },
         [loginUser.fulfilled]: (state, action) => {
-            if (action.payload.code === "auth/user-not-found") {
+            if (action.payload.code) {
                 state.isError = true;
+                state.user = null;
                 state.errorMessage = action.payload.code;
             } else {
                 state.user = action.payload;

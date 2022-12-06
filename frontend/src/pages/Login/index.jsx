@@ -25,10 +25,11 @@ const Login = () => {
         if (!username || !password) {
             error("Alanlar boş bırakılamaz");
         } else if (isError) {
+            console.log(errorMessage)
             error(errorMessageParser(errorMessage));
         }
         else {
-            await dispatch(loginUser(values))
+            dispatch(loginUser(values))
         }
     }
 
@@ -36,7 +37,7 @@ const Login = () => {
         if (isError) {
             error(errorMessageParser(errorMessage));
         }
-    }, [isError])
+    }, [isError, errorMessage])
 
 
     useEffect(() => {

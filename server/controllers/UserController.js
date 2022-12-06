@@ -52,14 +52,15 @@ exports.loginUser = async (req, res) => {
         await res.status(400).json({
             code: "auth/user-not-found",
         })
+        return;
     }
 
 
     if (user && !(await bcrypt.compare(password, user.password))) {
-        (await bcrypt.compare(password, user.password))
-        res.status(400).json({
-            message: "Şifre hatalı. Kontrol ediniz!"
+        await res.status(400).json({
+            code: "auth/invalid-password",
         })
+        return;
     }
 
     if (user && (await bcrypt.compare(password, user.password))) {
