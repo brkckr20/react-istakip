@@ -32,14 +32,12 @@ const CompanyDetail = () => {
         const filteredDatam = data.reduce((acc, object) => {
             return acc + object.amount
         }, 0);
-        const sumReceivedMoney = filteredMoney.reduce((acc, object) => {
+        const sumReceivedMoney = moneyData.reduce((acc, object) => {
             return acc + object.receivedMoney
         }, 0);
-
         return filteredDatam - sumReceivedMoney;
 
     }
-
 
     return (
         <div className='pt-16'>

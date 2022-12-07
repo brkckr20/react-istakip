@@ -74,7 +74,7 @@ const Login = () => {
                         </div>
                     </div>
                     <div>
-                        <button className='bg-anarenk hover:bg-anarenk/80 transition-colors w-full mt-5 p-4 text-white font-semibold'>Giriş Yap</button>
+                        <button className='bg-anarenk hover:bg-anarenk/80 transition-colors w-full mt-5 p-4 text-white font-semibold'>Kayıt Ol</button>
                     </div>
                 </form>
                 <h3 className='text-center py-2 text-white'>Hesabın var mı! <Link to="/giris" className='text-anarenk'>Giriş Yap</Link></h3>
